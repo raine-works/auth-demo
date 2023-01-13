@@ -13,7 +13,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 	} else {
 		prisma.$connect()
 
-		const dbToken = await prisma.token.findUnique({
+		const dbToken = await prisma.jwt.findUnique({
 			where: {
 				access_token: req.headers.authorization?.split(' ')[1],
 			},

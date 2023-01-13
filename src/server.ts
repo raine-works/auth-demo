@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import { config } from 'dotenv'
+import { cleanupJob } from './jobs/cleanup.job'
 
 config()
 const PORT = process.env.PORT ?? 8080
@@ -19,4 +20,5 @@ app.use((req: Request, res: Response) => {
 /** Start the server */
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`)
+	cleanupJob.start()
 })
