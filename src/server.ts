@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
+import history from 'connect-history-api-fallback'
 import { config } from 'dotenv'
 import { cleanupJob } from './jobs/cleanup.job'
 
@@ -10,15 +11,23 @@ const app: Application = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/', require('./routers/auth.router').default)
+/** API routes must come before static */
+app.use('/api', require('./routers/auth.router').default)
+app.use('/api', require('./routers/user.router').default)
 
-/** Catch all must be the last route */
-app.use((req: Request, res: Response) => {
-	res.status(404).json({ error: 'resource no found' })
-})
+/** Default to static route */
+const staticMiddleware = express.static('.dist')
+app.use(staticMiddleware)
+app.use(
+  history({
+    disableDotRule: true,
+    verbose: true
+  })
+)
+app.use(staticMiddleware)
 
 /** Start the server */
 app.listen(PORT, () => {
-	console.log(`Listening on port ${PORT}`)
-	cleanupJob.start()
+  console.log(`Listening on port ${PORT}`)
+  cleanupJob.start()
 })

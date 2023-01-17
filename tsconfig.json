@@ -1,24 +1,18 @@
 {
-	"compilerOptions": {
-		"lib": ["esnext"],
-		"noEmit": false,
-		"emitDeclarationOnly": true,
-		"resolveJsonModule": true,
-		"composite": false,
-		"declaration": true,
-		"declarationMap": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"inlineSources": false,
-		"isolatedModules": true,
-		"moduleResolution": "node",
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"preserveWatchOutput": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"outDir": ".types",
-		"rootDir": "."
-	},
-	"include": ["src", "esbuild", "package.json"]
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
