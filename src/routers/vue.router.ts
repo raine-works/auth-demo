@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { clientAxios } from '../plugin/axios.plugin'
 import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 import NotFound from '../pages/NotFound.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -22,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   }
 ]
 

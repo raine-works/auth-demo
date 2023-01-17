@@ -7,11 +7,11 @@ const user = useUserStore()
 
 onMounted(async () => {
   if (!user.id) {
-    await clientAxios.get('/verify').then((res) => {
-      user.$patch({ id: res.data.id })
-    })
+    const auth = await clientAxios.get('/verify')
+    if (auth.status === 200) {
+      user.$patch({ id: auth.data.id })
+    }
   }
-
   if (!user.email) {
     const userRes = await clientAxios.get(`/user/${user.id}`)
     user.update(userRes.data)
